@@ -1,0 +1,9 @@
+<p>
+  <%= item.text %>
+</p>
+
+<p>
+  <%= link_to 'Delete Item', [item.checklist, item],
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+</p>

@@ -1,0 +1,18 @@
+<p>
+  <strong>Title:</strong>
+  <%= @checklist.title %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @checklist.text %>
+</p>
+
+<h2>Items</h2>
+<%= render @checklist.items %>
+
+<h2>Add an item:</h2>
+<%= render 'items/form' %>
+
+<%= link_to 'Back', checklists_path %>
+| <%= link_to 'Edit', edit_checklist_path(@checklist) %>
