@@ -1,4 +1,6 @@
 class ChecklistsController < ApplicationController
+  before_filter :require_sign_in!, except: [:index, :show]
+
   def create
     @checklist = Checklist.new(checklist_params)
     if @checklist.save

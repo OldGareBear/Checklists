@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910133328) do
+ActiveRecord::Schema.define(version: 20160912125345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20160910133328) do
     t.text     "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "author_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -51,6 +52,17 @@ ActiveRecord::Schema.define(version: 20160910133328) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "checklists_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "checklist_id"
+  end
+
+  add_index "users_checklists", ["checklist_id"], name: "index_users_checklists_on_checklist_id", using: :btree
+  add_index "users_checklists", ["user_id"], name: "index_users_checklists_on_user_id", using: :btree
+
+  add_foreign_key "checklists", "users", column: "author_id"
   add_foreign_key "comments", "checklists"
   add_foreign_key "items", "checklists"
+  add_foreign_key "users_checklists", "checklists"
+  add_foreign_key "users_checklists", "users"
 end

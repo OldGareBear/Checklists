@@ -7,6 +7,13 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :checklists
 
+  has_many(
+      :authored_checklists,
+      class_name: Checklist,
+      foreign_key: :author_id,
+      primary_key: :id
+  )
+
   def self.find_by_credentials(username, password)
     user = self.find_by_username(username)
     return user && valid_password?(password) ? user : nil
@@ -28,6 +35,6 @@ class User < ActiveRecord::Base
   end
 
   def ensure_session_token
-    self.session_token || reset_token!
+    self.session_token ||= SecureRandom.urlsafe_base64(16)
   end
 end
