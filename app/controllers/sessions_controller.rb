@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     user = User.find_by_credentials(session_params[:username], session_params[:password])
     if user
       sign_in(user)
-      redirect_to checklists_path
+      redirect_to welcome_index_path
     else
       flash.now[:errors] = 'Incorrect username/password combination'
       render :new

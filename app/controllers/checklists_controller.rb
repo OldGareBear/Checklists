@@ -1,6 +1,11 @@
 class ChecklistsController < ApplicationController
   before_filter :require_sign_in!, except: [:index, :show]
 
+  def my_checklists
+    @checklists = Checklist.where(author_id: current_user.id)
+    render :index
+  end
+
   def create
     @checklist = Checklist.new(checklist_params)
     @checklist.author = current_user

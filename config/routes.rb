@@ -9,5 +9,7 @@ Checklists::Application.routes.draw do
     resources :items
   end
 
+  get 'my_checklists' => 'checklists#my_checklists', as: 'my_checklists'
+
   root 'welcome#index'
 end
