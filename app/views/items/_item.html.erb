@@ -2,8 +2,10 @@
   <%= item.text %>
 </p>
 
-<p>
-  <%= link_to 'Delete Item', [item.checklist, item],
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-</p>
+<% if current_user.can_delete?(item) %>
+  <p>
+    <%= link_to 'Delete Item', [item.checklist, item],
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+  </p>
+<% end %>

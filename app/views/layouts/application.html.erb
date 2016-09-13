@@ -8,6 +8,15 @@
 </head>
 <body>
 
+<% if signed_in? %>
+    <li class="nav-button" id="logout">
+      <%= button_to "Log out",
+                    sessions_url,
+                    method: :delete,
+                    class: "log-out" %>
+    </li>
+<% end %>
+
 <%= yield %>
 
 </body>

@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 
   def self.find_by_credentials(username, password)
     user = self.find_by_username(username)
-    return user && valid_password?(password) ? user : nil
+    return user && user.valid_password?(password) ? user : nil
   end
 
   def valid_password?(password)
@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
 
   def ensure_session_token
     self.session_token ||= SecureRandom.urlsafe_base64(16)
+  end
+
+  def can_edit?(resource)
+    resource.can_be_deleted_by?(self)
   end
 
   def can_delete?(resource)

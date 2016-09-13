@@ -1,7 +1,7 @@
 Checklists::Application.routes.draw do
   get 'welcome/index'
 
-  resource :session, only: [:create, :new, :destroy]
+  resource :sessions, only: [:create, :new, :destroy]
 
   resource :users
 

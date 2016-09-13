@@ -3,6 +3,7 @@ class ChecklistsController < ApplicationController
 
   def create
     @checklist = Checklist.new(checklist_params)
+    @checklist.author = current_user
     if @checklist.save
       redirect_to @checklist
     else
