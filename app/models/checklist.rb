@@ -5,4 +5,7 @@ class Checklist < ActiveRecord::Base
   has_many :items, dependent: :destroy
   has_and_belongs_to_many :users
 
+  def can_be_deleted_by?(user)
+    user == self.author
+  end
 end
