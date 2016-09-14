@@ -1,6 +1,7 @@
-<h1>Listing checklists</h1>
+<h1><% if flash[:my_checklists] %>My<% else %>All<% end %> checklists</h1>
 
 <%= link_to 'New checklist', new_checklist_path %>
+<br>
 
 <table>
   <tr>
@@ -13,14 +14,22 @@
         <td><%= checklist.title %></td>
         <td><%= checklist.text %></td>
         <td><%= link_to 'Show', checklist %></td>
+
         <% if current_user.can_edit?(checklist) %>
           <td><%= link_to 'Edit', edit_checklist_path(checklist) %></td>
         <% end %>
+
         <% if current_user.can_delete?(checklist) %>
-          <td><%= link_to 'Destroy', checklist_path(checklist),
-                          method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Destroy', checklist_path(checklist), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
+
+        <% if !current_user.checklists.include?(checklist) %>
+          <td><%= link_to 'Add', add_checklist_path(checklist) %></td>
+        <% end %>
+
       </tr>
   <% end %>
 
 </table>
+<br>
+<%= link_to 'Back', welcome_index_path %>

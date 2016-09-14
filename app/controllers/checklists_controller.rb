@@ -2,8 +2,15 @@ class ChecklistsController < ApplicationController
   before_filter :require_sign_in!, except: [:index, :show]
 
   def my_checklists
-    @checklists = Checklist.where(author_id: current_user.id)
+    @checklists = current_user.checklists
+    flash.now[:my_checklists] = true
     render :index
+  end
+
+  def add_checklist
+    @checklist = Checklist.find(params[:id])
+    current_user.checklists << @checklist
+    redirect_to @checklist
   end
 
   def create
