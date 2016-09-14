@@ -25,4 +25,16 @@ group :development do
   gem 'quiet_assets'
 end
 
+group :test do
+  gem 'faker'
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'launchy'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
+
 gem 'bcrypt-ruby', require: 'bcrypt'
