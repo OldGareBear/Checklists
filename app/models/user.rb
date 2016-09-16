@@ -1,17 +1,18 @@
 class User < ActiveRecord::Base
 
-  validates :username, presence: true, length: {minimum: 3}
+  validates :username, presence: true, length: {minimum: 3}, uniqueness: true
   validates :password_digest, :session_token, presence: true
 
   after_initialize :ensure_session_token
 
-  has_and_belongs_to_many :checklists
+  has_and_belongs_to_many :checklists, dependent: :destroy
 
   has_many(
       :authored_checklists,
       class_name: Checklist,
       foreign_key: :author_id,
-      primary_key: :id
+      primary_key: :id,
+      dependent: :destroy
   )
 
   def self.find_by_credentials(username, password)

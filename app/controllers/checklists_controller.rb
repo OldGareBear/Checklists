@@ -41,6 +41,9 @@ class ChecklistsController < ApplicationController
 
   def update
     @checklist = Checklist.find(params[:id])
+
+    raise Exceptions::SecurityTransgression unless current_user.can_edit?(@checklist)
+
     @checklist.update(params[:checklist].permit(:title, :text))
 
     if @checklist.save
@@ -52,6 +55,9 @@ class ChecklistsController < ApplicationController
 
   def destroy
     @checklist = Checklist.find(params[:id])
+
+    raise Exceptions::SecurityTransgression unless current_user.can_delete?(@checklist)
+
     @checklist.destroy
     redirect_to checklists_path
   end

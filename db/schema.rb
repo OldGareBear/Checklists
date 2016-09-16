@@ -24,16 +24,6 @@ ActiveRecord::Schema.define(version: 20160912125345) do
     t.integer  "author_id"
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.string   "commenter"
-    t.text     "body"
-    t.integer  "checklist_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
-  add_index "comments", ["checklist_id"], name: "index_comments_on_checklist_id", using: :btree
-
   create_table "items", force: :cascade do |t|
     t.text     "text"
     t.boolean  "is_done"
@@ -52,7 +42,7 @@ ActiveRecord::Schema.define(version: 20160912125345) do
     t.datetime "updated_at",      null: false
   end
 
-  create_table "checklists_users", force: :cascade do |t|
+  create_table "users_checklists", force: :cascade do |t|
     t.integer "user_id"
     t.integer "checklist_id"
   end
@@ -61,7 +51,6 @@ ActiveRecord::Schema.define(version: 20160912125345) do
   add_index "users_checklists", ["user_id"], name: "index_users_checklists_on_user_id", using: :btree
 
   add_foreign_key "checklists", "users", column: "author_id"
-  add_foreign_key "comments", "checklists"
   add_foreign_key "items", "checklists"
   add_foreign_key "users_checklists", "checklists"
   add_foreign_key "users_checklists", "users"

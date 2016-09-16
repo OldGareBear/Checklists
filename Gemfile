@@ -23,6 +23,7 @@ group :development do
   gem 'binding_of_caller'
   gem 'pry-rails'
   gem 'quiet_assets'
+  gem 'guard-rspec'
 end
 
 group :test do
@@ -30,11 +31,15 @@ group :test do
   gem 'capybara'
   gem 'guard-rspec'
   gem 'launchy'
+  gem 'shoulda-matchers'
+  gem 'cucumber'
 end
 
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'spring'
+  gem 'spring-commands-rspec'
 end
 
 gem 'bcrypt-ruby', require: 'bcrypt'

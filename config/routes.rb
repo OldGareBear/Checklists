@@ -10,7 +10,7 @@ Checklists::Application.routes.draw do
   end
 
   get 'my_checklists' => 'checklists#my_checklists', as: 'my_checklists'
-  get 'checklists/:id/add' => 'checklists#add_checklist', as: 'add_checklist'
+  post 'checklists/:id/add' => 'checklists#add_checklist', as: 'add_checklist'
 
   root 'welcome#index'
 end

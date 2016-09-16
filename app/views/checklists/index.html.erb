@@ -24,7 +24,7 @@
         <% end %>
 
         <% if !current_user.checklists.include?(checklist) %>
-          <td><%= link_to 'Add', add_checklist_path(checklist) %></td>
+          <td><%= button_to 'Add', add_checklist_path(checklist) %></td>
         <% end %>
 
       </tr>
